@@ -1,0 +1,3 @@
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg: "REDLINE C2 payload traffic detected"; http_uri; pcre: "/\.exe$/i"; http_header:field user-agent; content: "AutoHotKey"; sid: 1;)
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg: "REDLINE C2 configuration traffic detected"; file_data; content: "ScanFTP"; content: "ScanFiles"; content: "ScanFilesPaths"; content: "ScanWallet"; content: "ScanBrowsers"; content: "ScanVPN"; content: "ScanScreen"; sid: 2;)						
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg: "REDLINE C2 exfiltration traffic detected";file_data; content: "ScannedFTP"; content: "ScannedFiles"; content: "ScannedFilesPaths"; content: "ScannedWallet"; content: "ScannedBrowsers"; content: "ScannedVPN"; content: "ScannedScreen"; sid: 3;)
